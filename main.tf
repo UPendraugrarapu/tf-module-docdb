@@ -28,3 +28,23 @@ resource "aws_docdb_subnet_group" "main" {
     {Name = "${var.env}-subnet-group"}
     )
 }
+resource "aws_ssm_parameter" "docdb_url" {
+  name  = var.parameters[count.index].name
+  type  = var.parameters[count.index].type
+  value = "mongodb://${data.aws_ssm_parameter.user.value}:${data.aws_ssm_parameter.pass.value}@dev-docdb.cluster-cfwwsa38t5dt.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false"
+}
+resource "aws_ssm_parameter" "docdb_endpoint" {
+  name  = var.parameters[count.index].name
+  type  = var.parameters[count.index].type
+  value = var.parameters[count.index].value
+}
+resource "aws_ssm_parameter" "docdb_user" {
+  name  = var.parameters[count.index].name
+  type  = var.parameters[count.index].type
+  value = var.parameters[count.index].value
+}
+resource "aws_ssm_parameter" "docdb_pass" {
+  name  = var.parameters[count.index].name
+  type  = var.parameters[count.index].type
+  value = var.parameters[count.index].value
+}
