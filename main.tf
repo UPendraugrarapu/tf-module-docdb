@@ -26,11 +26,11 @@ resource "aws_security_group" "main" {
 
 
   ingress {
-    description      = "DOCDB"
-    from_port        = 27017
-    to_port          = 27017
-    protocol         = "tcp"
-    cidr_blocks      = var.allow_subnets
+    description = "DOCDB"
+    from_port   = 27017
+    to_port     = 27017
+    protocol    = "tcp"
+    cidr_blocks = var.allow_subnets
 
   }
   egress {
@@ -42,10 +42,10 @@ resource "aws_security_group" "main" {
 
     tags = merge(
       var.tags,
-      {Name = "docdb-${var.env}"}
+      { Name = "docdb-${var.env}" }
     )
   }
-
+}
 resource "aws_docdb_subnet_group" "main" {
   name       = "${var.env}-docdb"
   subnet_ids = var.subnet_ids
