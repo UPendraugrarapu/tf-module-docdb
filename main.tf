@@ -40,11 +40,12 @@ resource "aws_security_group" "main" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
 
-    tags = merge(
-      var.tags,
-      { Name = "docdb-${var.env}" }
-    )
+
   }
+  tags = merge(
+    var.tags,
+    { Name = "docdb-${var.env}" }
+  )
 }
 resource "aws_docdb_subnet_group" "main" {
   name       = "${var.env}-docdb"
